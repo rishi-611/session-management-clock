@@ -28,18 +28,18 @@ class SessionCounter extends React.Component {
       <div className="container counter-container">
         <h3 className="text-center">Session Length</h3>
         <div className="row">
-          <div
-            className="col-2 counter-icon"
-            onClick={this.handleUpClick.bind(this)}
-          >
-            <i className="fas fa-arrow-up"></i>
+          <div className="col-2 counter-icon">
+            <i
+              className="fas fa-arrow-up"
+              onClick={this.handleUpClick.bind(this)}
+            ></i>
           </div>
           <div className="col-8 text-center">{this.props.sessionLength}</div>
-          <div
-            className="col-2 counter-icon"
-            onClick={this.handleDownClick.bind(this)}
-          >
-            <i className="fas fa-arrow-down"></i>
+          <div className="col-2 counter-icon">
+            <i
+              className="fas fa-arrow-down"
+              onClick={this.handleDownClick.bind(this)}
+            ></i>
           </div>
         </div>
       </div>

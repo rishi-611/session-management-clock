@@ -1,6 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import { incrementBreakLength, decrementBreakLength } from "../actions";
+import {
+  incrementBreakLength,
+  decrementBreakLength,
+  breakLengthChanged,
+} from "../actions";
 
 class BreakCounter extends React.Component {
   handleUpClick() {
@@ -9,6 +13,7 @@ class BreakCounter extends React.Component {
     }
 
     this.props.incrementBreakLength();
+    this.props.breakLengthChanged();
   }
 
   handleDownClick() {
@@ -16,6 +21,7 @@ class BreakCounter extends React.Component {
       return;
     }
     this.props.decrementBreakLength();
+    this.props.breakLengthChanged();
   }
 
   render() {
@@ -23,18 +29,18 @@ class BreakCounter extends React.Component {
       <div className="container counter-container">
         <h3 className="text-center">Break Length</h3>
         <div className="row">
-          <div
-            className="col-2 counter-icon"
-            onClick={this.handleUpClick.bind(this)}
-          >
-            <i className="fas fa-arrow-up"></i>
+          <div className="col-2 counter-icon">
+            <i
+              className="fas fa-arrow-up"
+              onClick={this.handleUpClick.bind(this)}
+            ></i>
           </div>
           <div className="col-8 text-center">{this.props.breakLength}</div>
-          <div
-            className="col-2 counter-icon"
-            onClick={this.handleDownClick.bind(this)}
-          >
-            <i className="fas fa-arrow-down"></i>
+          <div className="col-2 counter-icon">
+            <i
+              className="fas fa-arrow-down"
+              onClick={this.handleDownClick.bind(this)}
+            ></i>
           </div>
         </div>
       </div>
@@ -51,4 +57,5 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
   incrementBreakLength,
   decrementBreakLength,
+  breakLengthChanged,
 })(BreakCounter);

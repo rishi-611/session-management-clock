@@ -31,9 +31,22 @@ export const sessionLengthChanged = () => (dispatch, getState) => {
   });
 };
 
+export const breakLengthChanged = () => (dispatch, getState) => {
+  dispatch({
+    type: constants.BREAK_LENGTH_CHANGED,
+    payload: getState().breakLength,
+  });
+};
+
 export const decrementSessionTimer = () => {
   return {
     type: constants.DECREMENT_SESSION_TIMER,
+  };
+};
+
+export const decrementBreakTimer = () => {
+  return {
+    type: constants.DECREMENT_BREAK_TIMER,
   };
 };
 
@@ -42,4 +55,10 @@ export const sessionCompleted = () => (dispatch, getState) => {
     type: constants.SESSION_COMPLETED,
     payload: getState().sessionLength,
   });
+};
+
+export const breakCompleted = () => {
+  return {
+    type: constants.BREAK_COMPLETED,
+  };
 };

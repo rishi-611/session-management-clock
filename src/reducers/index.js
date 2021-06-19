@@ -23,7 +23,7 @@ const sessionLengthReducer = (state = 25, action) => {
   }
 };
 
-const timeLeftReducer = (state = 1 * 10, action) => {
+const sessionTimeLeftReducer = (state = 1 * 10, action) => {
   switch (action.type) {
     case constants.SESSION_LENGTH_CHANGED:
       return action.payload * 60;
@@ -36,10 +36,36 @@ const timeLeftReducer = (state = 1 * 10, action) => {
   }
 };
 
+const breakTimeLeftReducer = (state = 5 * 60, action) => {
+  switch (action.type) {
+    case constants.BREAK_LENGTH_CHANGED:
+      return action.payload * 60;
+    case constants.DECREMENT_BREAK_TIMER:
+      return state - 1;
+    case constants.BREAK_COMPLETED:
+      return action.payload * 60;
+    default:
+      return state;
+  }
+};
+
+const onGoingEvent = (state = "session", action) => {
+  switch (action.type) {
+    case constants.SESSION_COMPLETED:
+      return "break";
+    case constants.BREAK_COMPLETED:
+      return "session";
+    default:
+      return state;
+  }
+};
+
 const reducers = combineReducers({
   breakLength: breakLengthReducer,
   sessionLength: sessionLengthReducer,
-  timeLeft: timeLeftReducer,
+  sessionTimeLeft: sessionTimeLeftReducer,
+  onGoingEvent: onGoingEvent,
+  breakTimeLeft: breakTimeLeftReducer,
 });
 
 export default reducers;
