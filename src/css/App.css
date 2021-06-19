@@ -1,0 +1,47 @@
+:root {
+  --mango-tango: #ff8c42ff;
+  --medium-purple: #8a84e2ff;
+  --tart-orange: #ff3c38ff;
+  --rich-black-fogra-39: #070707ff;
+  --primary-light: #8a84e2ff;
+  --primary-dark: #080a1f;
+  --white: rgb(239, 240, 255);
+}
+
+body {
+  background-color: var(--primary-light);
+}
+
+/* counter css */
+
+.counters-grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.counter-container {
+  background: var(--primary-dark);
+  color: var(--white);
+  max-width: 370px;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+.counter-icon {
+  cursor: pointer;
+}
+
+/* timer css */
+
+.timer-label {
+  border: 3px solid var(--white);
+  border-radius: 0.8rem;
+  max-width: 400px;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+  padding: 1rem 2rem;
+}
