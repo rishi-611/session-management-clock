@@ -30,3 +30,16 @@ export const sessionLengthChanged = () => (dispatch, getState) => {
     payload: getState().sessionLength,
   });
 };
+
+export const decrementSessionTimer = () => {
+  return {
+    type: constants.DECREMENT_SESSION_TIMER,
+  };
+};
+
+export const sessionCompleted = () => (dispatch, getState) => {
+  dispatch({
+    type: constants.SESSION_COMPLETED,
+    payload: getState().sessionLength,
+  });
+};

@@ -23,9 +23,13 @@ const sessionLengthReducer = (state = 25, action) => {
   }
 };
 
-const timeLeftReducer = (state = 25 * 60, action) => {
+const timeLeftReducer = (state = 1 * 10, action) => {
   switch (action.type) {
     case constants.SESSION_LENGTH_CHANGED:
+      return action.payload * 60;
+    case constants.DECREMENT_SESSION_TIMER:
+      return state - 1;
+    case constants.SESSION_COMPLETED:
       return action.payload * 60;
     default:
       return state;

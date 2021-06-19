@@ -44,4 +44,15 @@ body {
   align-content: center;
   text-align: center;
   padding: 1rem 2rem;
+  color: var(--primary-dark);
+}
+
+.control {
+  transition: all 0.5s ease-out;
+  cursor: pointer;
+}
+
+.control:hover {
+  opacity: 0.9;
+  transform: scale(0.9);
 }
