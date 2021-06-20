@@ -1,9 +1,5 @@
 :root {
-  --mango-tango: #ff8c42ff;
-  --medium-purple: #8a84e2ff;
-  --tart-orange: #ff3c38ff;
-  --rich-black-fogra-39: #070707ff;
-  --primary-light: #8a84e2ff;
+  --primary-light: #8a84e2;
   --primary-dark: #080a1f;
   --white: rgb(239, 240, 255);
 }
@@ -31,7 +27,14 @@ body {
 .counter-icon .fas {
   cursor: pointer;
   transform: scale(1.2);
+}
+
+.counter-arrows {
   transition: all 0.5s ease-out;
+}
+.counter-arrows:hover {
+  transform: scale(1.4);
+  opacity: 0.8;
 }
 
 /* timer css */
@@ -47,6 +50,12 @@ body {
   text-align: center;
   padding: 1rem 2rem;
   color: var(--primary-dark);
+
+  box-shadow: 0 0 30px 10px rgba(8, 10, 31, 0.3) inset;
+}
+
+#time-left {
+  font-size: 2.5rem;
 }
 
 .control {

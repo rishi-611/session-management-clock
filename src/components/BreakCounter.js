@@ -27,18 +27,24 @@ class BreakCounter extends React.Component {
   render() {
     return (
       <div className="container counter-container">
-        <h3 className="text-center">Break Length</h3>
+        <h3 className="text-center" id="break-label">
+          Break Length
+        </h3>
         <div className="row">
           <div className="col-2 counter-icon">
             <i
-              className="fas fa-arrow-up"
+              className="fas fa-arrow-up counter-arrows"
+              id="break-increment"
               onClick={this.handleUpClick.bind(this)}
             ></i>
           </div>
-          <div className="col-8 text-center">{this.props.breakLength}</div>
+          <div className="col-8 text-center" id="break-length">
+            {this.props.breakLength}
+          </div>
           <div className="col-2 counter-icon">
             <i
-              className="fas fa-arrow-down"
+              className="fas fa-arrow-down counter-arrows"
+              id="break-decrement"
               onClick={this.handleDownClick.bind(this)}
             ></i>
           </div>

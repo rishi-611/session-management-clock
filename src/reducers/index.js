@@ -7,6 +7,8 @@ const breakLengthReducer = (state = 5, action) => {
       return state + 1;
     case constants.DECREMENT_BREAK_LENGTH:
       return state - 1;
+    case constants.RESET:
+      return 5;
     default:
       return state;
   }
@@ -18,12 +20,14 @@ const sessionLengthReducer = (state = 25, action) => {
       return state + 1;
     case constants.DECREMENT_SESSION_LENGTH:
       return state - 1;
+    case constants.RESET:
+      return 25;
     default:
       return state;
   }
 };
 
-const sessionTimeLeftReducer = (state = 1 * 10, action) => {
+const sessionTimeLeftReducer = (state = 25 * 60, action) => {
   switch (action.type) {
     case constants.SESSION_LENGTH_CHANGED:
       return action.payload * 60;
@@ -31,6 +35,8 @@ const sessionTimeLeftReducer = (state = 1 * 10, action) => {
       return state - 1;
     case constants.SESSION_COMPLETED:
       return action.payload * 60;
+    case constants.RESET:
+      return 25 * 60;
     default:
       return state;
   }
@@ -44,6 +50,8 @@ const breakTimeLeftReducer = (state = 5 * 60, action) => {
       return state - 1;
     case constants.BREAK_COMPLETED:
       return action.payload * 60;
+    case constants.RESET:
+      return 5 * 60;
     default:
       return state;
   }
@@ -54,6 +62,8 @@ const onGoingEvent = (state = "session", action) => {
     case constants.SESSION_COMPLETED:
       return "break";
     case constants.BREAK_COMPLETED:
+      return "session";
+    case constants.RESET:
       return "session";
     default:
       return state;

@@ -57,8 +57,15 @@ export const sessionCompleted = () => (dispatch, getState) => {
   });
 };
 
-export const breakCompleted = () => {
-  return {
+export const breakCompleted = () => (dispatch, getState) => {
+  dispatch({
     type: constants.BREAK_COMPLETED,
+    payload: getState().breakLength,
+  });
+};
+
+export const resetEverything = () => {
+  return {
+    type: constants.RESET,
   };
 };

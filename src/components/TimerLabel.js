@@ -5,6 +5,7 @@ import {
   decrementBreakTimer,
   sessionCompleted,
   breakCompleted,
+  resetEverything,
 } from "../actions";
 
 class TimerLabel extends React.Component {
@@ -15,13 +16,22 @@ class TimerLabel extends React.Component {
   }
 
   componentDidUpdate() {
-    if (this.props.sessionTimeLeft === 0) {
+    const beep = document.querySelector("#beep");
+    if (this.props.breakTimeLeft < 10 || this.props.sessionTimeLeft < 10) {
+      document.querySelector("#time-left").style.color = "#e74c3c";
+    } else {
+      document.querySelector("#time-left").style.color = "#080a1f";
+    }
+
+    if (this.props.sessionTimeLeft < 0) {
+      beep.play();
       clearInterval(this.sessionTimer);
       this.isTimerOn = false;
       this.props.sessionCompleted();
       this.toggleBreakTimer();
     }
-    if (this.props.breakTimeLeft === 0) {
+    if (this.props.breakTimeLeft < 0) {
+      beep.play();
       clearInterval(this.breakTimer);
       this.isBreakTimerOn = false;
       this.props.breakCompleted();
@@ -31,11 +41,16 @@ class TimerLabel extends React.Component {
 
   toggleSessionTimer() {
     this.isTimerOn = !this.isTimerOn;
+    const stopStart = document.querySelector("#start-stop");
     if (this.isTimerOn) {
+      stopStart.classList.remove("fa-play");
+      stopStart.classList.add("fa-pause");
       this.sessionTimer = setInterval(() => {
         this.props.decrementSessionTimer();
       }, 1000);
     } else {
+      stopStart.classList.add("fa-play");
+      stopStart.classList.remove("fa-stop");
       if (!this.sessionTimer) return;
       clearInterval(this.sessionTimer);
     }
@@ -43,15 +58,30 @@ class TimerLabel extends React.Component {
 
   toggleBreakTimer() {
     this.isBreakTimerOn = !this.isBreakTimerOn;
+    const stopStart = document.querySelector("#start-stop");
 
     if (this.isBreakTimerOn) {
+      stopStart.classList.remove("fa-play");
+      stopStart.classList.add("fa-pause");
       this.breakTimer = setInterval(() => {
         this.props.decrementBreakTimer();
       }, 1000);
     } else {
+      stopStart.classList.add("fa-play");
+      stopStart.classList.remove("fa-stop");
       if (!this.breakTimer) return;
       clearInterval(this.breakTimer);
     }
+  }
+
+  handleReset() {
+    this.props.resetEverything();
+
+    this.breakTimer && clearInterval(this.breakTimer);
+    this.sessionTimer && clearInterval(this.sessionTimer);
+    document.querySelector("#beep").load();
+    document.querySelector("#start-stop").classList.add("fa-play");
+    document.querySelector("#start-stop").classList.remove("fa-stop");
   }
 
   render() {
@@ -90,9 +120,17 @@ class TimerLabel extends React.Component {
             ></i>
           </div>
           <div className="col">
-            <i className="fas fa-sync-alt fa-2x control" id="reset"></i>
+            <i
+              className="fas fa-sync-alt fa-2x control"
+              id="reset"
+              onClick={() => this.handleReset()}
+            ></i>
           </div>
         </div>
+        <audio
+          id="beep"
+          src="https://drive.google.com/uc?export=download&id=15EifkmEZ7mzmVp0ao5ZDBJqp3oVblIJg"
+        ></audio>
       </div>
     );
   }
@@ -111,4 +149,5 @@ export default connect(mapStateToProps, {
   decrementBreakTimer,
   sessionCompleted,
   breakCompleted,
+  resetEverything,
 })(TimerLabel);
